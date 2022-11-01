@@ -26,7 +26,7 @@
   "homepage": "https://solidjs.com",
   "repository": {
     "type": "git",
-    "url": "https://github.com/aximsiva/solid-date-time-picker"
+    "url": "https://github.com/aximsoftDevTeam/solid-date-time-picker"
   },
   "license": "MIT",
   "devDependencies": {
