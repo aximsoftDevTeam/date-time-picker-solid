@@ -136,8 +136,6 @@ export const DateTimePicker = (
 
     const [timeValue, setTime] = createSignal<{ [key: string]: string }>({ hour: '', min: '', meridiem: '' })
 
-    // const [isSelectedDateInvalid, setSelectedDateState] = createSignal<Boolean>(false);
-
     const dateList = createMemo(() => {
         const currentMonth = headerView().monthIndex;
         const currentYear = headerView().year;
@@ -195,7 +193,6 @@ export const DateTimePicker = (
     })
 
     const headerNavigation = (index: number) => {
-
         const activeYear = Number(headerView().year);
         const activeMonthIndex = Number(headerView().monthIndex);
         const monthVal = new Date(activeYear, activeMonthIndex + (index), 0);
@@ -207,15 +204,15 @@ export const DateTimePicker = (
         }));
     }
 
+    // navigate year range during input field onchange and today onClick
     const yearViewNavigation = (value: Date) => {
-        // navigate year range during input field onchange and today onClick
         if ((yearRangeOffset().start > value.getFullYear() || ((yearRangeOffset().start + 8) < value.getFullYear()))) {
             setYearRangeOffset({ start: value.getFullYear() - 4, offset: 0 })
         }
     }
 
+    // handles onChange in Date edit field
     const editDate = (value: string) => {
-        // handles onChange in Date edit field
         const currentDate: any = moment(value, dateFormat).toDate();
         if (currentDate.toString() !== 'Invalid Date') {
             if (!dateRangeArr()[1]) {
@@ -226,8 +223,8 @@ export const DateTimePicker = (
         }
     }
 
+    // handles month view selection
     const monthSelection = (selectedMonthInd: number) => {
-        // handles month view selection
         const activeYear = Number(headerView().year);
         const newDate = new Date(activeYear, selectedMonthInd - 1, locDate()?.getDate());
         if (newDate.toString() !== 'Invalid Date') {
@@ -237,8 +234,8 @@ export const DateTimePicker = (
         }
     }
 
+    // handles year view range during navigation
     const yearNavigation = (value: number) => {
-        // handles year view range during navigation
         const offset = yearRangeOffset().offset + (value)
         const startYear = yearRangeOffset().start + (9 * value);
         setYearRangeOffset({ start: startYear, offset: offset })
