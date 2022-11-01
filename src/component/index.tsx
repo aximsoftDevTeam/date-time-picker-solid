@@ -204,7 +204,6 @@ export const DateTimePicker = (
         }));
     }
 
-
     // navigate year range during input field onchange and today onClick
     const yearViewNavigation = (value: Date) => {
         if ((yearRangeOffset().start > value.getFullYear() || ((yearRangeOffset().start + 8) < value.getFullYear()))) {
