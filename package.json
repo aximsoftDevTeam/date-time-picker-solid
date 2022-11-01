@@ -1,0 +1,45 @@
+{
+  "name": "solid-date-time-picker",
+  "version": "1.0.2",
+  "description": "An interactive Date and Time picker for SolidJs. ",
+  "author": "Aximsoft India Pvt Ltd",
+  "main": "dist/index.tsx",
+  "module": "dist/index.tsx",
+  "keywords": [
+    "Aximsoft",
+    "SolidJs",
+    "Date time picker",
+    "date-picker",
+    "date-time-picker",
+    "solid-datepicker",
+    "solidjs-datepicker",
+    "datetime-picker",
+    "solid-datetimepicker",
+    "solidjs-datetimepicker"
+  ],
+  "scripts": {
+    "start": "vite",
+    "dev": "vite",
+    "build": "rm -rf dist && NODE_ENV=production babel src/component --out-dir dist --copy-files",
+    "serve": "vite preview"
+  },
+  "homepage": "https://solidjs.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aximsiva/solid-date-time-picker"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.19.3",
+    "@babel/core": "^7.19.6",
+    "@babel/preset-env": "^7.19.4",
+    "typescript": "^4.8.2",
+    "vite": "^3.0.9",
+    "vite-plugin-solid": "^2.3.0"
+  },
+  "dependencies": {
+    "solid-js": "^1.5.1",
+    "moment": "^2.29.4",
+    "sass": "^1.55.0"
+  }
+}
