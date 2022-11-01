@@ -9,19 +9,19 @@ An interactive `Date and Time Picker` for SolidJS.
 
 __npm:__
 ```sh
-npm install solid-date-time-picker
+npm install date-time-picker-solid
 ```
 __yarn:__
 
 ```sh
-yarn add solid-date-time-picker
+yarn add date-time-picker-solid
 ```
 
 ## Example
 Here is an example of a basic app using DateTimePicker component:
 
 ```sh
-import { DateTimePicker } from 'solid-date-time-picker'
+import { DateTimePicker } from 'date-time-picker-solid'
 
 function App() {
   return <DateTimePicker currentDate={moment().toDate()} />;
