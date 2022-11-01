@@ -1,4 +1,4 @@
-![logo (2)](https://user-images.githubusercontent.com/94821587/199168159-e5b0fbe1-5834-4cfa-9806-09d49f36e9a8.svg)
+![Group 24](https://user-images.githubusercontent.com/117165113/199218375-595dfe56-c036-4f23-8ddb-895728431cef.svg)
 
 [![License: Aximsoft(MIT)](https://img.shields.io/badge/License-MIT-orange.svg)](https://opensource.org/licenses/MIT)  
 
