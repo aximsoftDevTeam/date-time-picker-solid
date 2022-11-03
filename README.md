@@ -35,7 +35,7 @@ function App() {
 UI / Theme Update
 
 # Preview
-![Group 4600](https://user-images.githubusercontent.com/94821587/199702778-dce4d0c0-c38d-4851-83a9-e92bd49339a0.png)
+![Group 4601](https://user-images.githubusercontent.com/94821587/199705914-5008eafb-ca10-43b0-a530-58cf409a94a2.png)
 
 
 # Properties
