@@ -2,7 +2,7 @@ import moment from 'moment';
 import type { Component } from 'solid-js';
 
 import { DateTimePicker } from './component';
-import { DateTimePickerVersion2 } from './component/version2';
+// import { DateTimePickerVersion2 } from './component/version2';
 
 const App: Component = () => {
   return (
@@ -13,12 +13,12 @@ const App: Component = () => {
         enableTimeView
         enableTodayNavigator
       />
-      <DateTimePickerVersion2
+      {/* <DateTimePickerVersion2
         currentDate={moment().toDate()}
         enableCalendarViewType
         enableTimeView
         enableTodayNavigator
-      />
+      /> */}
     </div>
   );
 };

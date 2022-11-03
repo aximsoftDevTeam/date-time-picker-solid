@@ -1,5 +1,5 @@
 import { createEffect, createMemo, createSignal } from "solid-js";
-import './assets/stylesheets/base.scss';
+import './assets/stylesheets/baseV2.scss';
 import moment from 'moment';
 import { monthList, viewList, weekDays } from "./utils/constant";
 
