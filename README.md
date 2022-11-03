@@ -1,3 +1,5 @@
+# Development In-Progress..
+
 ![dtps-logo 1 (1)](https://user-images.githubusercontent.com/117165113/199227886-15adf39f-829f-4268-afcf-36315cb1bee6.svg)
 
 
@@ -10,7 +12,6 @@ An interactive `Date and Time Picker` using SolidJS.
 
 __npm:__
 ```sh![dtps-logo 1](https://user-images.githubusercontent.com/117165113/199227572-f05f9b19-5d69-4414-8827-f22bcb5ab425.svg)
-
 npm install date-time-picker-solid
 ```
 __yarn:__
@@ -30,8 +31,11 @@ function App() {
 }
 ```
 
+## What's new
+UI / Theme Update
+
 # Preview
-![Group 25 (2)](https://user-images.githubusercontent.com/94821587/199169900-2290653b-bf3c-4662-ad16-d64fd9e147df.png)
+![Group 4600](https://user-images.githubusercontent.com/94821587/199702778-dce4d0c0-c38d-4851-83a9-e92bd49339a0.png)
 
 
 # Properties

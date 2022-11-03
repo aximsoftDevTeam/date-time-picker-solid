@@ -130,7 +130,7 @@ export const DateTimePicker = (
 
     const [activeView, setActiveView] = createSignal<string>(activeCalendarView);
 
-    const [yearRangeOffset, setYearRangeOffset] = createSignal({ start: new Date(currentDate).getFullYear() - 4, offset: 0 });
+    const [yearRangeOffset, setYearRangeOffset] = createSignal({ start: Number(moment(currentDate).format('YYYY')) - 4, offset: 0 });
 
     const [isTimeViewEnabled, setTimeView] = createSignal(false);
 
