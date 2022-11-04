@@ -4,12 +4,20 @@
   }
   
   .active {
-    background-color: #c5c3c3 !important;
+    background: linear-gradient(91.51deg, #315A98 1.52%, #487CBF 100.83%) !important;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #FFFFFF;
     pointer-events: none;
+    border-radius: 0.5rem;
+
   }
   
   .active-bg {
-    background-color: #c5c3c3 !important;
+    background: linear-gradient(91.51deg, #315A98 1.52%, #487CBF 100.83%) !important;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #FFFFFF;
   }
   
   .box-shadow-card {
@@ -60,6 +68,11 @@
     }
   
     .date-val {
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 20px;
+      letter-spacing: 0px;
+      text-align: center;
       padding: 0.25rem;
     }
   
@@ -68,6 +81,7 @@
   
       img {
         height: 1.25rem;
+        rotate: -180deg;
       }
     }
   }
@@ -106,12 +120,14 @@
     }
   
     .jump-today {
+      border: 1px solid #335D9B;
       border-radius: 0.5rem;
-      font-size: 0.9375rem;
+      // font-size: 0.9375rem;
       padding: 0.875rem 1.25rem;
-      background: #fff;
-      border: none;
       letter-spacing: 0.1rem;
+      background:  #fff;
+      font-weight: 600;
+      font-size: 1rem;
     }
   
   }
@@ -125,13 +141,17 @@
     letter-spacing: 0.1rem;
   
     .view-options {
-      border: none;
+      border: 1px solid #335D9B;
+      border-radius: 0.5rem;
+      background: #fff;
+      font-weight: 600;
+      font-size: 1rem;
+      // border: none;
       padding: 0.875rem 1.25rem;
       text-align: center;
       margin: 0.5rem 0;
       border-radius: 0.5rem;
       letter-spacing: 0.1rem;
-      font-size: 0.9375rem;
     }
   }
   
@@ -156,7 +176,6 @@
   
     .container-list {
       padding: 0.75rem;
-      border-radius: 0.5rem;
       margin: 0.75rem;
       // text-shadow: 0 0.0625rem 0 rgba(189, 179, 179, 0.4);
     }
@@ -175,10 +194,9 @@
         height: 2rem;
         margin: 0.75rem;
       }
-  
-      .year-navi__icon:hover {
-        box-shadow: rgb(100 100 111 / 20%) 0rem .125rem .4375rem .0625rem;
-        border-radius: 1rem;
+
+      .year-navi__icon_right{
+        rotate: -180deg;
       }
   
       .container-year-list {
@@ -326,12 +344,13 @@
     margin: 0.25rem;
     gap: 1rem;
   
-    .update-time {
+    .update-time  {
       // margin: 0.5rem;
+      border: 1px solid #335D9B;
       border-radius: 0.5rem;
-      // padding: 0.45rem 1rem;
+      font-weight: 600;
+      font-size: 0.85rem;
       background: #fff;
-      border: none;
       letter-spacing: 0.05rem;
     }
   

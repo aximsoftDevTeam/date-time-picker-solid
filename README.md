@@ -6,7 +6,7 @@
 [![License: Aximsoft(MIT)](https://img.shields.io/badge/License-MIT-orange.svg)](https://opensource.org/licenses/MIT)  
 
 
-An interactive `Date and Time Picker` using SolidJS.
+An interactive `Date and Time Picker` for SolidJS.
 
 # Installation
 
@@ -35,7 +35,7 @@ function App() {
 UI / Theme Update
 
 # Preview
-![Group 4601](https://user-images.githubusercontent.com/94821587/199705914-5008eafb-ca10-43b0-a530-58cf409a94a2.png)
+![Group 4602](https://user-images.githubusercontent.com/94821587/199963039-71bdae5f-915d-4a4b-aa1d-20afdfa027d9.png)
 
 
 # Properties

@@ -5,11 +5,14 @@ import { monthList, viewList, weekDays } from "./utils/constant";
 
 import caledarTimeIcon from './assets/icons/calender-time.svg';
 import rightArrowIcon from './assets/icons/right-arrow.svg';
-import leftArrowIcon from './assets/icons/left-arrow.svg';
+// import leftArrowIcon from './assets/icons/left-arrow.svg';
 import roundedRightArrowIcon from './assets/icons/round-right-arrow.svg';
 import roundedleftArrowIcon from './assets/icons/round-left-arrow.svg';
-import timingLogo from './assets/icons/time.svg';
-import calendarViewIcon from './assets/icons/calendarView.svg'
+
+import arrowIcon from './assets/icons/version2/arrow.svg';
+import clockLogo from './assets/icons/version2/clock.svg';
+import calendarLogo from './assets/icons/version2/calendar.svg';
+import calendarClockLogo from './assets/icons/version2/calendarClock.svg';
 
 interface IPropsValue {
     activeView: string;
@@ -266,6 +269,12 @@ export const DateTimePickerVersion2 = (
         }
     })
 
+    const isTodayEnabled = createMemo(() => {
+        const today = moment().startOf('days').toDate();
+        const seletedDate = moment(locDate()).startOf('days').toDate();
+        return moment(seletedDate).isSame(today);
+    })
+
     return (
         <div class='cal-parent'>
             {/* Header */}
@@ -276,7 +285,7 @@ export const DateTimePickerVersion2 = (
                             class={`left-arrow ${activeView() === 'day' ? 'cur-pointer' : 'v-none'} ${customizeLeftArrow}`}
                             onClick={() => headerNavigation(-1)}
                         >
-                            <img src={leftArrowIcon} alt='left arrow' />
+                            <img src={arrowIcon} alt='left arrow' />
                         </div>
                         : null
                 }
@@ -287,7 +296,7 @@ export const DateTimePickerVersion2 = (
                             class={`right-arrow ${activeView() === 'day' ? 'cur-pointer' : 'v-none'} ${customizeRightArrow}`}
                             onClick={() => { if (activeView() === 'day') headerNavigation(1) }}
                         >
-                            <img src={rightArrowIcon} alt='right arrow' />
+                            <img src={arrowIcon} alt='right arrow' />
                         </div>
                         : null
                 }
@@ -298,7 +307,7 @@ export const DateTimePickerVersion2 = (
                 <div class='cal-sub-header'>
                     {enableTodayNavigator && !enableDateRangeSelector ?
                         <button
-                            class={`jump-today cur-pointer box-shadow-card ${customizeTodayNavigator}`}
+                            class={`jump-today cur-pointer ${isTodayEnabled() ? 'active' : ''} ${customizeTodayNavigator}`}
                             onClick={() => {
                                 const newDate = moment().toDate();
                                 yearViewNavigation(newDate);
@@ -327,7 +336,7 @@ export const DateTimePickerVersion2 = (
                     }
                     {enableTimeView ? <img
                         class={`time-icon cur-pointer ${customizeTimeViewSwitch}`}
-                        src={isTimeViewEnabled() ? calendarViewIcon : timingLogo}
+                        src={isTimeViewEnabled() ? calendarLogo : clockLogo}
                         alt='Day Time Icon'
                         onClick={() => {
                             setTimeView(!isTimeViewEnabled());
@@ -342,7 +351,7 @@ export const DateTimePickerVersion2 = (
                     {viewList.map((it) => {
                         return (
                             <button
-                                class={`view-options box-shadow-card cur-pointer  ${cutomizeCalendarViewButtons} ${it.value === activeView() ? 'active' : ''}`}
+                                class={`view-options box-shadow-card cur-pointer ${cutomizeCalendarViewButtons} ${it.value === activeView() ? 'active' : ''}`}
                                 onClick={() => {
                                     if (isTimeViewEnabled()) {
                                         setTimeView(false)
@@ -395,7 +404,7 @@ export const DateTimePickerVersion2 = (
                 {/* Year View */}
                 {activeView() !== 'year' || isTimeViewEnabled() ? null :
                     <div class='container-year-view'>
-                        <img src={roundedleftArrowIcon} class={`${customizeYearLeftNavigationArrow} year-navi__icon cur-pointer`} alt='left arrow' onClick={() => { yearNavigation(-1) }} />
+                        <img src={arrowIcon} class={`${customizeYearLeftNavigationArrow} year-navi__icon cur-pointer`} alt='left arrow' onClick={() => { yearNavigation(-1) }} />
 
                         <div class='container-year-list'>
                             {[...Array(9)].map((_1, index) => {
@@ -418,7 +427,7 @@ export const DateTimePickerVersion2 = (
                                 )
                             })}
                         </div>
-                        <img src={roundedRightArrowIcon} class={`${customizeYearRightNavigationArrow} year-navi__icon cur-pointer`} alt='right arrow' onClick={() => { yearNavigation(1) }} />
+                        <img src={arrowIcon} class={`${customizeYearRightNavigationArrow} year-navi__icon year-navi__icon_right cur-pointer`} alt='right arrow' onClick={() => { yearNavigation(1) }} />
                     </div>
                 }
 
@@ -558,7 +567,7 @@ export const DateTimePickerVersion2 = (
                         <div class={`time-parent`}>
 
                             <div class={`time-view box-shadow-card ${customizeConsolidateTimeView}`}>
-                                <img class={`time-icon-container`} src={caledarTimeIcon} alt='Day Time Icon' />
+                                <img class={`time-icon-container`} src={calendarClockLogo} alt='Day Time Icon' />
                                 <div class='time-value'>
                                     <div class='show-only'>
                                         {momentFormatter(locDate(), 'ddd DD MMM, YYYY ')}{timeValue().hour}:{timeValue().min}
