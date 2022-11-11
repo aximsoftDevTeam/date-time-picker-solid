@@ -4,13 +4,12 @@
 [![License: Aximsoft(MIT)](https://img.shields.io/badge/License-MIT-orange.svg)](https://opensource.org/licenses/MIT)  
 
 
-An interactive `Date and Time Picker` using SolidJS.
+An interactive `Date and Time Picker` for SolidJS.
 
 # Installation
 
 __npm:__
 ```sh![dtps-logo 1](https://user-images.githubusercontent.com/117165113/199227572-f05f9b19-5d69-4414-8827-f22bcb5ab425.svg)
-
 npm install date-time-picker-solid
 ```
 __yarn:__
@@ -29,15 +28,15 @@ function App() {
   return <DateTimePicker currentDate={moment().toDate()} />;
 }
 ```
-
 # Preview
-![Group 25 (2)](https://user-images.githubusercontent.com/94821587/199169900-2290653b-bf3c-4662-ad16-d64fd9e147df.png)
-
+![Group 4601](https://user-images.githubusercontent.com/94821587/201339717-cb44d16f-4232-4dbd-82ae-c754b9c6dfb7.png)
 
 # Properties
 | Props | Type | Default Value | Discription |
 |------ | ------| ------ | ------ |
-| currentDate | `Date/string` | | Mandatory Field, default date for the calendar.|
+|currentDate| `Date/string` | | Mandatory Field, default date for the calendar.|
+|customizeInitialView|`string`|`''`|Add a class name to customize input field.|
+|customizeInitialCalendarIcon|`string`|`''`|Add a class name to customize calendar icon.|
 |dateFormat|`string`| `DD MMM, YYYY` | Displayed date format. |
 |enableDateRangeSelector|`boolean`| `False`| Enables date Range Selection. |
 |prevDate|`Date` |`moment().startOf('weeks')`| Start Date of range selection.|
@@ -53,7 +52,7 @@ function App() {
 |customizeActiveMonth|`string`|`''`| Add a class name to customize calendar view. |
 |__SECTION 1__|
 |enableSelectedDate|`boolean`|`True`| Display selected date.|
-|enableSelectedDateEditor|`boolean`|`False`| Makes selected date editable. |
+|enableSelectedDateEditor|`boolean`|`True`| Makes selected date editable. |
 |customizeSelectedDate|`string`|`''`| Add a class name to customize selected date view. |
 |enableTodayNavigator|`boolean`|`False`| Enables today navigating button.|
 |customizeTodayNavigator|`string`|`''`| Add a class name to customize today button. |
@@ -68,7 +67,7 @@ function App() {
 |customizeYearRightNavigationArrow|`string`|`''`| Add a class name to customize the year view right arrow  navigator. |
 |__TIME VIEW SECTION__|
 |enableTimeView|`boolean`|`False`| Enables Time view in calendar.|
-|ednableTimeEditing|`boolean`|`False`| Enables Time editing option in calendar.|
+|enableTimeEditing|`boolean`|`False`| Enables Time editing option in calendar.|
 |customizeTimeViewSwitch|`string`|`''`| Add a class name to customize the time view toggle button. |
 |customizeTimeInputField|`string`|`''`| Add a class name to customize the time input field. |
 |customizeTimeUpdateButton|`string`|`''`| Add a class name to customize the time update button. |

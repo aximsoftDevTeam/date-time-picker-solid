@@ -8,6 +8,9 @@ const App: Component = () => {
     <div class='parent'>
       <DateTimePicker
         currentDate={moment().toDate()}
+        enableCalendarViewType
+        enableTimeView
+        enableTodayNavigator
       />
     </div>
   );
