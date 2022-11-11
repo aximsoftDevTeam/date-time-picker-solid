@@ -1,5 +1,3 @@
-# Development In-Progress..
-
 ![dtps-logo 1 (1)](https://user-images.githubusercontent.com/117165113/199227886-15adf39f-829f-4268-afcf-36315cb1bee6.svg)
 
 
@@ -30,18 +28,15 @@ function App() {
   return <DateTimePicker currentDate={moment().toDate()} />;
 }
 ```
-
-## What's new
-UI / Theme Update
-
 # Preview
-![Group 4602](https://user-images.githubusercontent.com/94821587/199963039-71bdae5f-915d-4a4b-aa1d-20afdfa027d9.png)
-
+![Group 4601](https://user-images.githubusercontent.com/94821587/201339717-cb44d16f-4232-4dbd-82ae-c754b9c6dfb7.png)
 
 # Properties
 | Props | Type | Default Value | Discription |
 |------ | ------| ------ | ------ |
-| currentDate | `Date/string` | | Mandatory Field, default date for the calendar.|
+|currentDate| `Date/string` | | Mandatory Field, default date for the calendar.|
+|customizeInitialView|`string`|`''`|Add a class name to customize input field.|
+|customizeInitialCalendarIcon|`string`|`''`|Add a class name to customize calendar icon.|
 |dateFormat|`string`| `DD MMM, YYYY` | Displayed date format. |
 |enableDateRangeSelector|`boolean`| `False`| Enables date Range Selection. |
 |prevDate|`Date` |`moment().startOf('weeks')`| Start Date of range selection.|
