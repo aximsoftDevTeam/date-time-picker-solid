@@ -57,7 +57,7 @@ UI / Theme Update
 |customizeActiveMonth|`string`|`''`| Add a class name to customize calendar view. |
 |__SECTION 1__|
 |enableSelectedDate|`boolean`|`True`| Display selected date.|
-|enableSelectedDateEditor|`boolean`|`False`| Makes selected date editable. |
+|enableSelectedDateEditor|`boolean`|`True`| Makes selected date editable. |
 |customizeSelectedDate|`string`|`''`| Add a class name to customize selected date view. |
 |enableTodayNavigator|`boolean`|`False`| Enables today navigating button.|
 |customizeTodayNavigator|`string`|`''`| Add a class name to customize today button. |
@@ -72,7 +72,7 @@ UI / Theme Update
 |customizeYearRightNavigationArrow|`string`|`''`| Add a class name to customize the year view right arrow  navigator. |
 |__TIME VIEW SECTION__|
 |enableTimeView|`boolean`|`False`| Enables Time view in calendar.|
-|ednableTimeEditing|`boolean`|`False`| Enables Time editing option in calendar.|
+|enableTimeEditing|`boolean`|`False`| Enables Time editing option in calendar.|
 |customizeTimeViewSwitch|`string`|`''`| Add a class name to customize the time view toggle button. |
 |customizeTimeInputField|`string`|`''`| Add a class name to customize the time input field. |
 |customizeTimeUpdateButton|`string`|`''`| Add a class name to customize the time update button. |

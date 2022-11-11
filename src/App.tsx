@@ -15,7 +15,6 @@ const App: Component = () => {
       /> */}
       <DateTimePickerVersion2
         currentDate={moment().toDate()}
-        enableDateRangeSelector
         enableCalendarViewType
         enableTimeView
         enableTodayNavigator

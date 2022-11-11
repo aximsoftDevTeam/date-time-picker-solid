@@ -64,6 +64,7 @@ interface ICalendarComponentProps {
     customizeTimeDownArrow?: string;
     customizeTimeUpArrow?: string;
     renameTimeUpdateButton?: string;
+    customizeUpdateCalenderIcon?: string;
     calendarResponse?: (props: IPropsValue) => void;
 }
 
@@ -88,7 +89,7 @@ export const DateTimePickerVersion2 = (
 
         // section 1
         enableSelectedDate = true,
-        enableSelectedDateEditor = false,
+        enableSelectedDateEditor = true,
         dateFormat = 'DD MMM, YYYY',
         customizeSelectedDate = '',
         //
@@ -115,6 +116,7 @@ export const DateTimePickerVersion2 = (
         customizeConsolidateTimeView = '',
         customizeTimeDownArrow = '',
         customizeTimeUpArrow = '',
+        customizeUpdateCalenderIcon = '',
         renameTimeUpdateButton = '',
 
         // Output
@@ -280,14 +282,14 @@ export const DateTimePickerVersion2 = (
     return (
         <div class='calendar'>
             <div class='cal-initial-view cur-pointer' onClick={() => setCalendarState((prev) => !prev)}>
-                <img src={calendarClockLogo} class={customizeInitialCalendarIcon} />
+                <img src={calendarClockLogo} class={` icon-height ${customizeInitialCalendarIcon}`} />
                 {moment(locDate()).format(dateFormat)}
                 <img src={arrowIcon} class={`arrow-icon ${isCalendarEnabled() ? 'rotate-arrow-icon' : ''} ${customizeInitialView}`} />
             </div>
 
             <div class={`cal-parent ${!isCalendarEnabled() ? 'd-none' : ''}`}>
                 {/* Header */}
-                <div class='cal-header'>
+                <div class={`cal-header ${enableArrowNavigation ? '' : 'jst-center'}`}>
                     {
                         enableArrowNavigation ?
                             <div
@@ -313,10 +315,10 @@ export const DateTimePickerVersion2 = (
 
                 {/* Sub Header */}
                 {enableTodayNavigator || enableSelectedDate ?
-                    <div class='cal-sub-header'>
+                    <div class={`cal-sub-header ${!enableTodayNavigator || !enableTimeView ? 'jst-center' : ''}`}>
                         {enableTodayNavigator ?
                             <button
-                                class={`jump-today cur-pointer ${isTodayEnabled() ? 'active' : ''} ${customizeTodayNavigator}`}
+                                class={`btn-class jump-today cur-pointer ${isTodayEnabled() ? 'active' : ''} ${customizeTodayNavigator}`}
                                 onClick={() => {
                                     const newDate = moment().toDate();
                                     yearViewNavigation(newDate);
@@ -344,7 +346,7 @@ export const DateTimePickerVersion2 = (
                             </div>
                         }
                         {enableTimeView ? <img
-                            class={`time-icon cur-pointer ${customizeTimeViewSwitch}`}
+                            class={`icon-height cur-pointer ${customizeTimeViewSwitch}`}
                             src={isTimeViewEnabled() ? calendarLogo : clockLogo}
                             alt='Day Time Icon'
                             onClick={() => {
@@ -360,7 +362,7 @@ export const DateTimePickerVersion2 = (
                         {viewList.map((it) => {
                             return (
                                 <button
-                                    class={`view-options cur-pointer ${cutomizeCalendarViewButtons} ${it.value === activeView() ? 'active' : ''}`}
+                                    class={`btn-class btn-width cur-pointer ${cutomizeCalendarViewButtons} ${it.value === activeView() ? 'active' : ''}`}
                                     onClick={() => {
                                         if (isTimeViewEnabled()) {
                                             setTimeView(false)
@@ -375,7 +377,7 @@ export const DateTimePickerVersion2 = (
                     </div> : null}
 
                 {/* Month View */}
-                <div class={`main-container ${activeView() === 'day' ? 'container-day_view__header ' : ''}`}>
+                <div class={`main-container`}>
                     {activeView() !== 'month' || isTimeViewEnabled() ? null :
                         <div class='container-month-view'>
                             {monthList.map((it, monthIndex) => {
@@ -573,19 +575,16 @@ export const DateTimePickerVersion2 = (
                                     />
                                 </div>
                             </div>
-                            <hr/>
+                            <hr />
                             <div class={`time-parent`}>
-
-                                <div class={`time-view ${customizeConsolidateTimeView}`}>
-                                    <img class={`time-icon-container`} src={calendarClockLogo} alt='Day Time Icon' />
+                                <div class={`time-view`}>
+                                    <img class={`icon-height ${customizeUpdateCalenderIcon}`} src={calendarClockLogo} alt='Day Time Icon' />
                                     <div class='time-value'>
-                                        <div class='show-only'>
-                                            {momentFormatter(locDate(), 'ddd DD MMM, YYYY ')}{timeValue().hour}:{timeValue().min}
-                                        </div>
+                                        {momentFormatter(locDate(), 'ddd DD MMM, YYYY ')}{timeValue().hour}:{timeValue().min}
                                     </div>
                                 </div>
                                 <button
-                                    class={`update-time cur-pointer ${customizeTimeUpdateButton}`}
+                                    class={`btn-class active-bg btn-width cur-pointer ${customizeTimeUpdateButton}`}
                                     onClick={() => {
                                         const newDate = moment(locDate());
                                         newDate.set('hour', Number(timeValue().hour))

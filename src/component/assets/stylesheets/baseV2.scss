@@ -16,7 +16,6 @@
 .active-bg {
   background: linear-gradient(91.51deg, #315A98 1.52%, #487CBF 100.83%) !important;
   font-weight: 600;
-  font-size: 1rem;
   color: #FFFFFF;
 }
 
@@ -41,17 +40,44 @@
 }
 
 .bg-hover-clr {
-  background: #EFEFEF;
+  background: #DEF1FF;
 }
+
+.btn-class {
+  border: 1px solid #335D9B;
+  background: white;
+  font-weight: 600;
+  font-size: 1rem;
+  height: 2.5rem;
+  text-align: center;
+  margin: 0.5rem 0;
+  border-radius: 0.5rem;
+  letter-spacing: 0.1rem;
+}
+
+.btn-width {
+  width: 7rem;
+}
+
+.jst-center {
+  justify-content: space-evenly !important;
+}
+
+.icon-height {
+  height: 2.3rem;
+}
+
 
 .calendar {
   margin-top: 4rem;
-  min-width: 25rem;
-  max-width: 25rem;
+  min-width: 27rem;
+  max-width: 27rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .cal-initial-view {
-  padding: 1rem;
+  padding: 0.5rem 1.5rem;
   display: flex;
   margin-bottom: 0.5rem;
   font-size: 1rem;
@@ -75,21 +101,19 @@
 .cal-parent {
   /* align-items: center; */
   display: inline-block;
-  min-height: 30rem;
+  min-height: 25rem;
   background: #ffff;
   border-radius: 0.625rem;
+  padding: 1.5rem;
 }
 
 
 
 .cal-header {
-  margin: 1.5rem 0.7rem 0.5rem 0.7rem;
   display: flex;
   justify-content: space-between;
 
   .left-arrow {
-    // padding: 0.25rem;
-
     img {
       height: 1rem;
     }
@@ -101,12 +125,9 @@
     line-height: 20px;
     letter-spacing: 0px;
     text-align: center;
-    // padding: 0.25rem;
   }
 
   .right-arrow {
-    // padding: 0.25rem;
-
     img {
       height: 1rem;
       rotate: -180deg;
@@ -118,22 +139,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0.5rem 0.7rem 0.5rem 0.7rem;
-
-  .time-icon {
-    height: 2rem;
-    padding-left: 0.3125rem;
-    transition: transform 1s ease-in-out;
-  }
+  margin: 1.25rem 0;
 
   .today-col {
 
     .today-col-input {
       border: none;
       border-bottom: 1px solid #232323;
-      padding: 0.875rem 1.25rem;
+      height: 2.5rem;
       text-align: center;
-      margin: 0.5rem 0;
       letter-spacing: 0.1rem;
       font-size: 0.9375rem;
     }
@@ -150,17 +164,8 @@
   }
 
   .jump-today {
-    border: 1px solid #335D9B;
-    border-radius: 0.5rem;
-    // font-size: 0.9375rem;
-    padding: 0.875rem 1.25rem;
-    letter-spacing: 0.1rem;
-    background: #fff;
-    font-weight: 600;
-    font-size: 1rem;
     width: 6rem;
   }
-
 }
 
 
@@ -169,29 +174,10 @@
   justify-content: space-between;
   align-items: center;
   letter-spacing: 0.1rem;
-  margin: 0.5rem 0.7rem 0.5rem 0.7rem;
-
-  .view-options {
-    border: 1px solid #335D9B;
-    background: #ffff;
-    width: 7rem;
-    font-weight: 600;
-    font-size: 1rem;
-    // border: none;
-    padding: 0.875rem 1.25rem;
-    text-align: center;
-    margin: 0.5rem 0;
-    border-radius: 0.5rem;
-    letter-spacing: 0.1rem;
-  }
-}
-
-.container-day_view__header {
-  margin: 0.5rem 0.7rem 1.5rem 0.7rem !important;
+  margin: 1.25rem 0;
 }
 
 .main-container {
-  margin: 0.5rem 0.7rem 1.5rem 0.7rem;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -209,7 +195,6 @@
     padding: 0.75rem;
     margin: 0.75rem;
     border-radius: 0.5rem;
-    // text-shadow: 0 0.0625rem 0 rgba(189, 179, 179, 0.4);
   }
 
 
@@ -245,7 +230,6 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: space-evenly;
-      margin-top: 10px;
 
 
       .week-list-items {
@@ -263,14 +247,13 @@
     .list-header {
       font-weight: 600;
       border: none;
-      // border-bottom: 0.0625rem solid black;
+      margin-bottom: 1.25rem;
     }
 
     .week-list__date {
       gap: .6875rem
     }
   }
-
 
   .time-picker {
     display: flex;
@@ -283,7 +266,6 @@
     }
 
     .increment-icon {
-      // height: 2rem;
       rotate: 90deg;
     }
 
@@ -372,11 +354,16 @@
   }
 }
 
+// .time-parent {
+//   display: flex;
+// }
+
 .time-parent {
+  width: 24rem;
   display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  letter-spacing: normal;
 
   .update-time {
     border: 1px solid #335D9B;
@@ -387,12 +374,7 @@
     padding: 0.875rem 1.25rem;
     text-align: center;
     border-radius: 0.5rem;
-    letter-spacing: 0.05rem;
     width: 7rem;
-  }
-
-  .update-time:hover {
-    box-shadow: rgb(100 100 111 / 20%) 0rem 0.125rem 0.4375rem 0.0625rem;
   }
 
   .time-view {
@@ -401,25 +383,18 @@
     border: none;
     text-align: center;
     border-radius: 0.5rem;
-    letter-spacing: 0.1rem;
-    font-size: 0.9375rem;
-
-    .time-icon-container {
-      height: 2rem;
-    }
 
     .time-value {
       display: flex;
       align-items: center;
-
-      .show-only {
-        padding: 0.4rem;
-      }
+      letter-spacing: normal;
+      font-weight: 600;
+      margin-left: 1rem;
 
       .time-value-input {
         padding: 0.4rem;
         text-align: center;
-        letter-spacing: 0.1rem;
+        // letter-spacing: 0.1rem;
         border-bottom: 0.025rem solid black !important;
         max-width: 1.25rem;
         border: none;
