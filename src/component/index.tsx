@@ -35,10 +35,10 @@ interface ICalendarComponentProps {
     enableDateRangeSelector?: boolean;
     currentDate: Date | string;
     headerMonthFormat?: string;
-    headerYearFormat?: string
+    headerYearFormat?: string;
     enableArrowNavigation?: boolean;
     enableSelectedDate?: boolean;
-    enableSelectedDateEditor?: boolean
+    enableSelectedDateEditor?: boolean;
     enableTodayNavigator?: boolean;
     customizeSelectedDate?: string;
     customizeLeftArrow?: string;
@@ -62,6 +62,7 @@ interface ICalendarComponentProps {
     customizeTimeUpArrow?: string;
     renameTimeUpdateButton?: string;
     customizeUpdateCalenderIcon?: string;
+    closeOnSelect?: boolean;
     calendarResponse?: (props: IPropsValue) => void;
 }
 
@@ -75,6 +76,7 @@ export const DateTimePicker = (
         minDate,
         maxDate,
         customizeRangeSelectedDates = '',
+        closeOnSelect = false,
 
         // header
         headerMonthFormat = 'MMM',
@@ -223,7 +225,7 @@ export const DateTimePicker = (
                 setdateRangeArr([...dateRangeArr(), currentDate])
             }
             setLocDate(currentDate);
-            yearViewNavigation(currentDate)
+            yearViewNavigation(currentDate);
         }
     }
 
@@ -234,7 +236,7 @@ export const DateTimePicker = (
         if (newDate.toString() !== 'Invalid Date') {
             setLocDate(newDate);
         } else {
-            setLocDate(new Date(activeYear, selectedMonthInd, 1))
+            setLocDate(new Date(activeYear, selectedMonthInd, 1));
         }
     }
 
@@ -257,7 +259,7 @@ export const DateTimePicker = (
         if (dateRangeArr().length === 2) {
             setdateRangeArr([value]);
         } else {
-            setdateRangeArr([...dateRangeArr(), moment(value).endOf('days').toDate()])
+            setdateRangeArr([...dateRangeArr(), moment(value).endOf('days').toDate()]);
         }
     }
 
@@ -279,9 +281,9 @@ export const DateTimePicker = (
     return (
         <div class='calendar'>
             <div class='cal-initial-view cur-pointer' onClick={() => setCalendarState((prev) => !prev)}>
-                <img src={calendarClockLogo} class={` icon-height ${customizeInitialCalendarIcon}`} />
+                <img src={calendarClockLogo} alt="clock icon" class={` icon-height ${customizeInitialCalendarIcon}`} />
                 {moment(locDate()).format(dateFormat)}
-                <img src={arrowIcon} class={`arrow-icon ${isCalendarEnabled() ? 'rotate-arrow-icon' : ''} ${customizeInitialView}`} />
+                <img src={arrowIcon} alt="arrow icon" class={`arrow-icon ${isCalendarEnabled() ? 'rotate-arrow-icon' : ''} ${customizeInitialView}`} />
             </div>
 
             <div class={`cal-parent ${!isCalendarEnabled() ? 'd-none' : ''}`}>
@@ -428,7 +430,12 @@ export const DateTimePicker = (
                                     return (
                                         <div
                                             class={`container-list cur-pointer ${customizeListView} ${value === fullYear ? 'active box-shadow-card' : ''} ${isYearDisabled ? 'cust-dis pointer-none' : ''}`}
-                                            onClick={() => { setLocDate(new Date(value, month, date)) }}
+                                            onClick={() => {
+                                                setLocDate(new Date(value, month-1, date));
+                                                if (closeOnSelect) {
+                                                    setCalendarState(false);
+                                                }
+                                            }}
                                         >
                                             {`${value}`}
                                         </div>
@@ -589,7 +596,9 @@ export const DateTimePicker = (
                                         if (!moment(locDate()).isSame(newDate.toDate())) {
                                             setLocDate(newDate.toDate());
                                             setTimeView(false);
-                                            setCalendarState((prev) => !prev);
+                                            if (closeOnSelect) {
+                                                setCalendarState(false);
+                                            }
                                         }
                                     }}
                                 >
