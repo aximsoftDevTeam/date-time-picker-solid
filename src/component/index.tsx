@@ -219,7 +219,7 @@ export const DateTimePicker = (
 
     // handles onChange in Date edit field
     const editDate = (value: string) => {
-        const currentDate: any = moment(value, dateFormat).toDate();
+        const currentDate: any = moment(value, 'DD MMM, YYYY').toDate();
         if (currentDate.toString() !== 'Invalid Date') {
             if (!dateRangeArr()[1]) {
                 setdateRangeArr([...dateRangeArr(), currentDate])
@@ -334,7 +334,7 @@ export const DateTimePicker = (
                                     type='text'
                                     placeholder='DD MMM YYYY'
                                     class={`today-col-input ${customizeSelectedDate}`}
-                                    value={momentFormatter(locDate() || moment().toDate(), dateFormat)}
+                                    value={momentFormatter(locDate() || moment().toDate(), 'DD MMM, YYYY')}
                                     readOnly={!enableSelectedDateEditor}
                                     onKeyPress={(event: any) => {
                                         if (event.key === 'Enter' && event.target.value) {
