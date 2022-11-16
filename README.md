@@ -39,23 +39,27 @@ View the package in action:
 | Props                             | Type                  | Default Value               | Discription                                                         |
 | --------------------------------- | --------------------- | --------------------------- | ------------------------------------------------------------------- |
 | currentDate                       | `Date/string`         |                             | Mandatory Field, default date for the calendar.                     |
-| customizeInitialView              | `string`              | `''`                        | Add a class name to customize input field.                          |
-| customizeInitialCalendarIcon      | `string`              | `''`                        | Add a class name to customize calendar icon.                        |
+| customizeCalendar                 | `string`              | `''`                        | Add a class name to customize the calendar.                         |
 | dateFormat                        | `string`              | `DD MMM, YYYY`              | Displayed date format.                                              |
 | enableDateRangeSelector           | `boolean`             | `False`                     | Enables date Range Selection.                                       |
 | prevDate                          | `Date`                | `moment().startOf('weeks')` | Start Date of range selection.                                      |
 | minDate                           | `Date`                | `undefined`                 | Start Date.                                                         |
 | maxDate                           | `Date`                | `undefined`                 | End Date.                                                           |
-| customizeRangeSelectedDates       | `string`              | `''`                        | Add a class name to customize the selected date range.              |
 | closeOnSelect                     | `boolean`             | `False`                     | Closes the calendar after selection.                                |
-| __HEADER SECTION__                |
+| __TOGGLE SECTION__                |                       |                             |                                                                     |
+| customizeCalendarToggler          | `string`              | `''`                        | Add a class name to customize the calendar toggler.                 |
+| customizeTogglerArrowIcon         | `string`              | `''`                        | Add a class name to customize input field arrow Icon.               |
+| customizeTogglerCalendarIcon      | `string`              | `''`                        | Add a class name to customize calendar icon.                        |
+| __BODY SECTION__                  |                       |                             |                                                                     |
+| customizeCalendarBody             | `string`              | `''`                        | Add a class name to customize calendar body.                        |
+| __NAV SECTION__                   |                       |                             |                                                                     |
 | headerMonthFormat                 | `string`              | `MMM`                       | Desired month format displayed in the header.                       |
 | headerYearFormat                  | `string`              | `YYYY`                      | Header year view.                                                   |
 | enableArrowNavigation             | `boolean`             | `True`                      | Enables/Disables the navigation.                                    |
 | customizeLeftArrow                | `string`              | `''`                        | Add a class name to customize left arrow.                           |
 | customizeRightArrow               | `string`              | `''`                        | Add a class name to customize right arrow.                          |
 | customizeActiveMonth              | `string`              | `''`                        | Add a class name to customize calendar view.                        |
-| __SECTION 1__                     |
+| __TITLE SECTION__                 |
 | enableSelectedDate                | `boolean`             | `True`                      | Display selected date.                                              |
 | enableSelectedDateEditor          | `boolean`             | `True`                      | Makes selected date editable.                                       |
 | customizeSelectedDate             | `string`              | `''`                        | Add a class name to customize selected date view.                   |
@@ -65,6 +69,7 @@ View the package in action:
 | enableCalendarViewType            | `boolean`             | `False`                     | Enables Calendar type switching button.                             |
 | activeCalendarView                | `day/month/year`      | `day`                       | Active view                                                         |
 | cutomizeCalendarViewButtons       | `string`              | `''`                        | Add a class name to customize view type buttons.                    |
+| customizeRangeSelectedDates       | `string`              | `''`                        | Add a class name to customize the selected date range.              |
 | __PICKER SECTION__                |
 | customizeListView                 | `string`              | `''`                        | Add a class name to customize the list.                             |
 | customizeListHeader               | `string`              | `''`                        | Add a class name to customize the list header.                      |

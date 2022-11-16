@@ -26,9 +26,12 @@ interface IPropsValue {
 
 interface ICalendarComponentProps {
     dateFormat?: string;
-    customizeInitialView?: string;
-    customizeInitialCalendarIcon?: string;
     customizeRangeSelectedDates?: string;
+    customizeCalendar?: string;
+    customizeCalendarToggler?: string;
+    customizeTogglerArrowIcon?: string;
+    customizeTogglerCalendarIcon?: string;
+    customizeCalendarBody?: string;
     prevDate?: Date;
     minDate?: Date;
     maxDate?: Date;
@@ -69,15 +72,17 @@ interface ICalendarComponentProps {
 export const DateTimePicker = (
     {
         currentDate,
-        customizeInitialView = '',
-        customizeInitialCalendarIcon = '',
+        customizeTogglerCalendarIcon = '',
         enableDateRangeSelector = false,
         prevDate = moment().startOf('weeks').toDate(),
         minDate,
         maxDate,
         customizeRangeSelectedDates = '',
         closeOnSelect = false,
-
+        customizeCalendar = '',
+        customizeCalendarToggler = '',
+        customizeTogglerArrowIcon = '',
+        customizeCalendarBody = '',
         // header
         headerMonthFormat = 'MMM',
         headerYearFormat = 'YYYY',
@@ -279,14 +284,14 @@ export const DateTimePicker = (
     })
 
     return (
-        <div class='calendar'>
-            <div class='cal-initial-view cur-pointer' onClick={() => setCalendarState((prev) => !prev)}>
-                <img src={calendarClockLogo} alt="clock icon" class={` icon-height ${customizeInitialCalendarIcon}`} />
+        <div class={`calendar ${customizeCalendar}`}>
+            <div class={`cal-initial-view cur-pointer ${customizeCalendarToggler}`} onClick={() => setCalendarState((prev) => !prev)}>
+                <img src={calendarClockLogo} alt="clock icon" class={` icon-height ${customizeTogglerCalendarIcon}`} />
                 {moment(locDate()).format(dateFormat)}
-                <img src={arrowIcon} alt="arrow icon" class={`arrow-icon ${isCalendarEnabled() ? 'rotate-arrow-icon' : ''} ${customizeInitialView}`} />
+                <img src={arrowIcon} alt="arrow icon" class={`arrow-icon ${isCalendarEnabled() ? 'rotate-arrow-icon' : ''} ${customizeTogglerArrowIcon}`} />
             </div>
 
-            <div class={`cal-parent ${!isCalendarEnabled() ? 'd-none' : ''}`}>
+            <div class={`cal-parent ${!isCalendarEnabled() ? 'd-none' : ''} ${customizeCalendarBody}`}>
                 {/* Header */}
                 <div class={`cal-header ${enableArrowNavigation ? '' : 'jst-center'}`}>
                     {
@@ -431,7 +436,7 @@ export const DateTimePicker = (
                                         <div
                                             class={`container-list cur-pointer ${customizeListView} ${value === fullYear ? 'active box-shadow-card' : ''} ${isYearDisabled ? 'cust-dis pointer-none' : ''}`}
                                             onClick={() => {
-                                                setLocDate(new Date(value, month-1, date));
+                                                setLocDate(new Date(value, month - 1, date));
                                                 if (closeOnSelect) {
                                                     setCalendarState(false);
                                                 }
