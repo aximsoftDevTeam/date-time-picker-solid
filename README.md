@@ -94,5 +94,9 @@ View the package in action:
 [<img src="https://user-images.githubusercontent.com/94821587/199001054-6d046033-4914-4b52-9fde-081e749618d4.svg" alt="typescript" width="40" height="40"/>](https://momentjs.com/)
 [<img src="https://user-images.githubusercontent.com/94821587/199011459-d948644b-d0c5-4a14-8809-96bf5508edc9.png" alt="typescript" width="40" height="40"/>](https://www.w3.org/Style/CSS/Overview.en.html)
 
+# Let's get connected
+[<img src="https://user-images.githubusercontent.com/94821587/203234266-05f2750c-f6a8-46ec-b27e-3d6c128dac74.svg" alt="typescript" width="40" height="40"/>](https://discord.gg/S5kPs6qV)
+
+
 # License
 `MIT`
