@@ -181,6 +181,7 @@
 .main-container {
   display: flex;
   justify-content: space-evenly;
+  flex-direction: column;
   align-items: center;
   letter-spacing: 0.1rem;
 

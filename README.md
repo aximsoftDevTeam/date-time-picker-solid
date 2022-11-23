@@ -45,6 +45,7 @@ View the package in action:
 | prevDate                          | `Date`                | `moment().startOf('weeks')` | Start Date of range selection.                                      |
 | minDate                           | `Date`                | `undefined`                 | Start Date.                                                         |
 | maxDate                           | `Date`                | `undefined`                 | End Date.                                                           |
+| children                          | `JSXElement`          | `undefined`                 | Add child element                                                   |
 | closeOnSelect                     | `boolean`             | `False`                     | Closes the calendar after selection.                                |
 | __TOGGLE SECTION__                |                       |                             |                                                                     |
 | customizeCalendarToggler          | `string`              | `''`                        | Add a class name to customize the calendar toggler.                 |

@@ -1,4 +1,4 @@
-import { createEffect, createMemo, createSignal } from "solid-js";
+import { createEffect, createMemo, createSignal, JSXElement } from "solid-js";
 import './assets/stylesheets/base.scss';
 import moment from 'moment';
 import { monthList, viewList, weekDays } from "./utils/constant";
@@ -66,6 +66,7 @@ interface ICalendarComponentProps {
     renameTimeUpdateButton?: string;
     customizeUpdateCalenderIcon?: string;
     closeOnSelect?: boolean;
+    children?: JSXElement;
     calendarResponse?: (props: IPropsValue) => void;
 }
 
@@ -123,6 +124,7 @@ export const DateTimePicker = (
         customizeUpdateCalenderIcon = '',
         renameTimeUpdateButton = '',
 
+        children,
         // Output
         calendarResponse
 
@@ -195,10 +197,10 @@ export const DateTimePicker = (
                 month: momentFormatter(locDate(), 'MM'),
                 year: momentFormatter(locDate(), 'YYYY'),
                 day: momentFormatter(locDate(), 'dddd'),
-                time: momentFormatter(locDate(), 'HH : MM'),
+                time: momentFormatter(locDate(), 'hh : mm'),
                 currentWeekStartDate: moment(locDate()).startOf('weeks').toDate(),
                 currentWeekEndDate: moment(locDate()).endOf('weeks').toDate(),
-                setCalendarState: (props) => setCalendarState(props),
+                setCalendarState: (props) => setCalendarState(props), // to handle the calendar view open and close
             })
         }
     })
@@ -380,8 +382,8 @@ export const DateTimePicker = (
                         })}
                     </div> : null}
 
-                {/* Month View */}
                 <div class={`main-container`}>
+                    {/* Month View */}
                     {activeView() !== 'month' || isTimeViewEnabled() ? null :
                         <div class='container-month-view'>
                             {monthList.map((it, monthIndex) => {
@@ -613,6 +615,9 @@ export const DateTimePicker = (
                         </div>
                     }
                 </div>
+                {
+                    children
+                }
             </div>
         </div>
     )
