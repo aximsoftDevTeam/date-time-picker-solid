@@ -1,12 +1,17 @@
 import { createEffect, createMemo, createSignal, JSXElement } from "solid-js";
 import './assets/stylesheets/base.scss';
-import moment from 'moment';
 import { monthList, viewList, weekDays } from "./utils/constant";
+import dayjs from 'dayjs'
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
+import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 
 import arrowIcon from './assets/icons/arrow.svg';
 import clockLogo from './assets/icons/clock.svg';
 import calendarLogo from './assets/icons/calendar.svg';
-import calendarClockLogo from './assets/icons/calendarClock.svg';
+import calendarClockLogo from './assets/icons/calendarClock.svg'
+
+dayjs.extend(isSameOrAfter);
+dayjs.extend(isSameOrBefore);
 
 interface IPropsValue {
     activeView: string;
@@ -75,11 +80,11 @@ export const DateTimePicker = (
         currentDate,
         customizeTogglerCalendarIcon = '',
         enableDateRangeSelector = false,
-        prevDate = moment().startOf('weeks').toDate(),
+        prevDate = dayjs().startOf('weeks').toDate(),
         minDate,
         maxDate,
         customizeRangeSelectedDates = '',
-        closeOnSelect = false,
+        closeOnSelect = true,
         customizeCalendar = '',
         customizeCalendarToggler = '',
         customizeTogglerArrowIcon = '',
@@ -140,7 +145,7 @@ export const DateTimePicker = (
 
     const [activeView, setActiveView] = createSignal<string>(activeCalendarView);
 
-    const [yearRangeOffset, setYearRangeOffset] = createSignal({ start: Number(moment(currentDate).format('YYYY')) - 4, offset: 0 });
+    const [yearRangeOffset, setYearRangeOffset] = createSignal({ start: Number(dayjs(currentDate).format('YYYY')) - 4, offset: 0 });
 
     const [isTimeViewEnabled, setTimeView] = createSignal(false);
 
@@ -151,25 +156,25 @@ export const DateTimePicker = (
     const dateList = createMemo(() => {
         const currentMonth = headerView().monthIndex;
         const currentYear = headerView().year;
-        const monthStartDate = moment(`${currentMonth}, ${currentYear}`, 'MM, YYYY').startOf('month').format('DD MMMM, YYYY');
+        const monthStartDate = dayjs(`${currentYear}, ${currentMonth},`).startOf('month').format('DD MMMM, YYYY')
 
-        const weekStartDate = moment(monthStartDate, 'DD MMMM, YYYY').startOf('week').toDate();
+        const weekStartDate = dayjs(monthStartDate).startOf('week').toDate();
 
         return [...Array(42)].map((_1, index) => {
-            return moment(weekStartDate).add(index, 'days').toDate();
+            return dayjs(weekStartDate).add(index, 'days').toDate();
         })
     })
 
     const momentFormatter = (date: Date | undefined, formatStr: string) => {
-        return moment(date).format(formatStr);
+        return dayjs(date).format(formatStr);
     }
 
     // Render only once
     createEffect(() => {
         setPreviousDate(prevDate);
-        setLocDate(moment(currentDate).toDate());
-        const startDate = moment(prevDate).toDate();
-        const endDate = moment(currentDate).toDate();
+        setLocDate(dayjs(currentDate).toDate());
+        const startDate = dayjs(prevDate).toDate();
+        const endDate = dayjs(currentDate).toDate();
         setdateRangeArr([startDate, endDate]);
     });
 
@@ -198,8 +203,8 @@ export const DateTimePicker = (
                 year: momentFormatter(locDate(), 'YYYY'),
                 day: momentFormatter(locDate(), 'dddd'),
                 time: momentFormatter(locDate(), 'hh : mm'),
-                currentWeekStartDate: moment(locDate()).startOf('weeks').toDate(),
-                currentWeekEndDate: moment(locDate()).endOf('weeks').toDate(),
+                currentWeekStartDate: dayjs(locDate()).startOf('weeks').toDate(),
+                currentWeekEndDate: dayjs(locDate()).endOf('weeks').toDate(),
                 setCalendarState: (props) => setCalendarState(props), // to handle the calendar view open and close
             })
         }
@@ -226,7 +231,7 @@ export const DateTimePicker = (
 
     // handles onChange in Date edit field
     const editDate = (value: string) => {
-        const currentDate: any = moment(value, 'DD MMM, YYYY').toDate();
+        const currentDate: any = dayjs(value).toDate();
         if (currentDate.toString() !== 'Invalid Date') {
             if (!dateRangeArr()[1]) {
                 setdateRangeArr([...dateRangeArr(), currentDate])
@@ -266,7 +271,7 @@ export const DateTimePicker = (
         if (dateRangeArr().length === 2) {
             setdateRangeArr([value]);
         } else {
-            setdateRangeArr([...dateRangeArr(), moment(value).endOf('days').toDate()]);
+            setdateRangeArr([...dateRangeArr(), dayjs(value).endOf('days').toDate()]);
         }
     }
 
@@ -280,16 +285,16 @@ export const DateTimePicker = (
     })
 
     const isTodayEnabled = createMemo(() => {
-        const today = moment().startOf('days').toDate();
-        const seletedDate = moment(locDate()).startOf('days').toDate();
-        return moment(seletedDate).isSame(today);
+        const today = dayjs().startOf('days').toDate();
+        const seletedDate = dayjs(locDate()).startOf('days').toDate();
+        return dayjs(seletedDate).isSame(today);
     })
 
     return (
         <div class={`calendar ${customizeCalendar}`}>
             <div class={`cal-initial-view cur-pointer ${customizeCalendarToggler}`} onClick={() => setCalendarState((prev) => !prev)}>
                 <img src={calendarClockLogo} alt="clock icon" class={` icon-height ${customizeTogglerCalendarIcon}`} />
-                {moment(locDate()).format(dateFormat)}
+                {dayjs(locDate()).format(dateFormat)}
                 <img src={arrowIcon} alt="arrow icon" class={`arrow-icon ${isCalendarEnabled() ? 'rotate-arrow-icon' : ''} ${customizeTogglerArrowIcon}`} />
             </div>
 
@@ -326,7 +331,7 @@ export const DateTimePicker = (
                             <button
                                 class={`btn-class jump-today cur-pointer ${isTodayEnabled() ? 'active' : ''} ${customizeTodayNavigator}`}
                                 onClick={() => {
-                                    const newDate = moment().toDate();
+                                    const newDate = dayjs().toDate();
                                     yearViewNavigation(newDate);
                                     setLocDate(newDate);
                                 }}
@@ -341,7 +346,7 @@ export const DateTimePicker = (
                                     type='text'
                                     placeholder='DD MMM YYYY'
                                     class={`today-col-input ${customizeSelectedDate}`}
-                                    value={momentFormatter(locDate() || moment().toDate(), 'DD MMM, YYYY')}
+                                    value={momentFormatter(locDate() || dayjs().toDate(), 'DD MMM, YYYY')}
                                     readOnly={!enableSelectedDateEditor}
                                     onKeyPress={(event: any) => {
                                         if (event.key === 'Enter' && event.target.value) {
@@ -466,8 +471,8 @@ export const DateTimePicker = (
                             </div>
                             <div class='week-list week-list__date'>
                                 {dateList().map((it) => {
-                                    const startDate = moment(`${headerView().month}, ${headerView().year}`, 'MMM, YYYY').startOf('months').toDate();
-                                    const endDate = moment(`${headerView().month}, ${headerView().year}`, 'MMM, YYYY').endOf('months').toDate();
+                                    const startDate = dayjs(`${headerView().year}, ${headerView().month}`).startOf('months').toDate();
+                                    const endDate = dayjs(`${headerView().year}, ${headerView().month}`).endOf('months').toDate();
 
                                     let isActive = false; // gives selected dates
                                     let isRangeActive = false; // highlights the dates in-between
@@ -476,24 +481,24 @@ export const DateTimePicker = (
                                     if (enableDateRangeSelector) {
 
                                         if (dateRangeArr()[0] && !dateRangeArr()[1]) {
-                                            isActive = moment(it).isSame(moment(previousDateState()).startOf('days'));
-                                            isDatesDisabled = moment(it).isBefore(moment(previousDateState()).startOf('days'));
+                                            isActive = dayjs(it).isSame(dayjs(previousDateState()).startOf('days'));
+                                            isDatesDisabled = dayjs(it).isBefore(dayjs(previousDateState()).startOf('days'));
                                             isRangeActive = false;
                                         }
                                         else if (dateRangeArr()[0] && dateRangeArr()[1]) {
-                                            isActive = moment(it).isSame(moment(locDate()).startOf('days')) || moment(it).isSame(moment(previousDateState()).startOf('days'));
-                                            isRangeActive = moment(it).isAfter(moment(previousDateState()).startOf('days')) && moment(it).isBefore(moment(locDate()).startOf('days'));
+                                            isActive = dayjs(it).isSame(dayjs(locDate()).startOf('days')) || dayjs(it).isSame(dayjs(previousDateState()).startOf('days'));
+                                            isRangeActive = dayjs(it).isAfter(dayjs(previousDateState()).startOf('days')) && dayjs(it).isBefore(dayjs(locDate()).startOf('days'));
                                         }
                                     } else {
-                                        isActive = moment(it).isSame(moment(locDate()).startOf('days'));
+                                        isActive = dayjs(it).isSame(dayjs(locDate()).startOf('days'));
                                     }
 
                                     // handles Max date given by user 
                                     if (maxDate) {
-                                        isDatesDisabled = isDatesDisabled || moment(it).isSameOrAfter(moment(maxDate).startOf('days'));
+                                        isDatesDisabled = isDatesDisabled || dayjs(it).isSameOrAfter(dayjs(maxDate).startOf('days'));
                                     }
                                     if (minDate) {
-                                        isDatesDisabled = isDatesDisabled || moment(it).isSameOrBefore(moment(minDate).startOf('days'));
+                                        isDatesDisabled = isDatesDisabled || dayjs(it).isSameOrBefore(dayjs(minDate).startOf('days'));
                                     }
                                     return (
                                         <div
@@ -597,11 +602,12 @@ export const DateTimePicker = (
                                 <button
                                     class={`btn-class active-bg btn-width cur-pointer ${customizeTimeUpdateButton}`}
                                     onClick={() => {
-                                        const newDate = moment(locDate());
-                                        newDate.set('hour', Number(timeValue().hour))
-                                        newDate.set('minute', Number(timeValue().min));
-                                        if (!moment(locDate()).isSame(newDate.toDate())) {
-                                            setLocDate(newDate.toDate());
+                                        const newDate = dayjs(locDate()).toDate();
+                                        newDate.setHours(Number(timeValue().hour))
+                                        newDate.setMinutes(Number(timeValue().min));
+
+                                        if (!dayjs(locDate()).isSame(newDate)) {
+                                            setLocDate(newDate);
                                             setTimeView(false);
                                             if (closeOnSelect) {
                                                 setCalendarState(false);
