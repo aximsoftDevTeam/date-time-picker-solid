@@ -47,6 +47,7 @@ View the package in action:
 | maxDate                           | `Date`                | `undefined`                 | End Date.                                                           |
 | children                          | `JSXElement`          | `undefined`                 | Add child element                                                   |
 | closeOnSelect                     | `boolean`             | `False`                     | Closes the calendar after selection.                                |
+| calendarWidth|`number`|`26rem`| Adjust calendar toggle section. (Note: value should be in `rem`)|
 | __TOGGLE SECTION__                |                       |                             |                                                                     |
 | customizeCalendarToggler          | `string`              | `''`                        | Add a class name to customize the calendar toggler.                 |
 | customizeTogglerArrowIcon         | `string`              | `''`                        | Add a class name to customize input field arrow Icon.               |
