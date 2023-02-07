@@ -68,6 +68,7 @@ interface ICalendarComponentProps {
     closeOnSelect?: boolean;
     children?: JSXElement;
     calendarResponse?: (props: IPropsValue) => void;
+    calendarWidth?: number
 }
 
 export const DateTimePicker = (
@@ -84,6 +85,7 @@ export const DateTimePicker = (
         customizeCalendarToggler = '',
         customizeTogglerArrowIcon = '',
         customizeCalendarBody = '',
+        calendarWidth = 0,
         // header
         headerMonthFormat = 'MMM',
         headerYearFormat = 'YYYY',
@@ -287,8 +289,14 @@ export const DateTimePicker = (
 
     return (
         <div class={`calendar ${customizeCalendar}`}>
-            <div class={`cal-initial-view cur-pointer ${customizeCalendarToggler}`} onClick={() => setCalendarState((prev) => !prev)}>
-                <img src={calendarClockLogo} alt="clock icon" class={` icon-height ${customizeTogglerCalendarIcon}`} />
+            <div
+                class={`cal-initial-view cur-pointer ${customizeCalendarToggler}`}
+                onClick={() => setCalendarState((prev) => !prev)}
+                style={
+                    calendarWidth && calendarWidth < 29 ? { "max-width": `${calendarWidth}rem`, "min-width": `${calendarWidth}rem` } : undefined
+                }
+            >
+                {(calendarWidth ? (calendarWidth >= 13) : true) ? <img src={calendarClockLogo} alt="clock icon" class={`${customizeTogglerCalendarIcon}`} /> : null}
                 {moment(locDate()).format(dateFormat)}
                 <img src={arrowIcon} alt="arrow icon" class={`arrow-icon ${isCalendarEnabled() ? 'rotate-arrow-icon' : ''} ${customizeTogglerArrowIcon}`} />
             </div>
