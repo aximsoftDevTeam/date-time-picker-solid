@@ -29,7 +29,7 @@
     "build": "rm -rf dist && NODE_ENV=production babel src/component --out-dir dist --copy-files",
     "serve": "vite preview"
   },
-  "homepage": "https://solidjs.com",
+  "homepage": "https://github.com/aximsoftDevTeam/date-time-picker-solid",
   "repository": {
     "type": "git",
     "url": "https://github.com/aximsoftDevTeam/date-time-picker-solid"
