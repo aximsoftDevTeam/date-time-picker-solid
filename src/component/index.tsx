@@ -85,7 +85,7 @@ export const DateTimePicker = (
         minDate,
         maxDate,
         customizeRangeSelectedDates = '',
-        closeOnSelect = true,
+        closeOnSelect = false,
         customizeCalendar = '',
         customizeCalendarToggler = '',
         customizeTogglerArrowIcon = '',
@@ -100,7 +100,7 @@ export const DateTimePicker = (
         customizeActiveMonth = '',
 
         // section 1
-        enableSelectedDate = true,
+        enableSelectedDate = false,
         enableSelectedDateEditor = true,
         dateFormat = 'DD MMM, YYYY',
         customizeSelectedDate = '',
@@ -302,7 +302,7 @@ export const DateTimePicker = (
                 }
             >
                 {(calendarWidth ? (calendarWidth >= 13) : true) ? <img src={calendarClockLogo} alt="clock icon" class={`${customizeTogglerCalendarIcon}`} /> : null}
-                {dayjs(locDate()).format(dateFormat)}
+                {enableDateRangeSelector ? `${dayjs(previousDateState()).format(dateFormat)} - ${dayjs(locDate()).format(dateFormat)}` : dayjs(locDate()).format(dateFormat)}
                 <img src={arrowIcon} alt="arrow icon" class={`arrow-icon ${isCalendarEnabled() ? 'rotate-arrow-icon' : ''} ${customizeTogglerArrowIcon}`} />
             </div>
 
@@ -526,6 +526,7 @@ export const DateTimePicker = (
                                             }}
                                         >
                                             {momentFormatter(it, 'DD')}
+                                            {dayjs(it).isSame(dayjs(new Date()).startOf('day')) ? <span class='today_highlight' /> : null}
                                         </div>
 
                                     )

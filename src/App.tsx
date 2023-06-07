@@ -4,14 +4,12 @@ import { DateTimePicker } from './component';
 
 const App: Component = () => {
   return (
-    <div class='parent'>
-      <DateTimePicker
-        currentDate={new Date()}
-        enableCalendarViewType
-        enableTimeView
-        enableTodayNavigator
-      />
-    </div>
+      <div class='parent'>
+        <DateTimePicker
+          currentDate={new Date()}      
+        />
+      </div>
+
   );
 };
 
