@@ -28,12 +28,13 @@ function App() {
   return <DateTimePicker currentDate={moment().toDate()} />;
 }
 ```
+View the package in action: (
+<a href='https://codesandbox.io/s/zen-darkness-z1v4wu?file=/src/App.tsx' target='_blank'>Basic Example</a>
+)
+
 # Preview
 ![Group 4601](https://user-images.githubusercontent.com/94821587/201339717-cb44d16f-4232-4dbd-82ae-c754b9c6dfb7.png)
 
-# Demo
-View the package in action: 
-<a href='https://codesandbox.io/s/zen-darkness-z1v4wu?file=/src/App.tsx' target='_blank'>Basic Example</a>
 
 # Properties
 | Props                             | Type                  | Default Value               | Discription                                                         |
