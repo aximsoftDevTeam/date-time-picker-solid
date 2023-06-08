@@ -17,6 +17,11 @@ __yarn:__
 ```sh
 yarn add date-time-picker-solid
 ```
+## Note
+Include this in your **index.html** file.
+```sh
+ <link rel="stylesheet" type="text/css" href="node_modules/date-time-picker-solid/dist/style.css">
+```
 
 ## Example
 Here is an example of a basic app using DateTimePicker component:
