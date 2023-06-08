@@ -30,7 +30,7 @@ Here is an example of a basic app using DateTimePicker component:
 import { DateTimePicker } from 'date-time-picker-solid'
 
 function App() {
-  return <DateTimePicker currentDate={moment().toDate()} />;
+  return <DateTimePicker currentDate={new Date()} />;
 }
 ```
 View the package in action: (
