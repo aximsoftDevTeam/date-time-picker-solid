@@ -432,3 +432,15 @@
     }
   }
 }
+
+@media screen and (max-width: 512px) and (min-width: 420px){
+  .calendar{
+    scale: 0.85;
+  }
+}
+
+@media screen and (max-width: 419px){
+    .calendar{
+    scale: 0.7;
+  }
+}
