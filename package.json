@@ -19,7 +19,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "private": "false",
   "keywords": [
     "solid",
     "calendar-picker",
