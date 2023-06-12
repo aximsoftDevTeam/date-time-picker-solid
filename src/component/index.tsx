@@ -45,8 +45,8 @@ interface ICalendarComponentProps {
 	headerMonthFormat?: string;
 	headerYearFormat?: string;
 	enableArrowNavigation?: boolean;
-	enableSelectedDate?: boolean;
-	enableSelectedDateEditor?: boolean;
+	enableDateInputField?: boolean;
+	enableDateInputFieldEditor?: boolean;
 	enableTodayNavigator?: boolean;
 	customizeSelectedDate?: string;
 	customizeLeftArrow?: string;
@@ -100,8 +100,8 @@ export const DateTimePicker = (
 		customizeActiveMonth = '',
 
 		// section 1
-		enableSelectedDate = false,
-		enableSelectedDateEditor = true,
+		enableDateInputField = false,
+		enableDateInputFieldEditor = true,
 		dateFormat = 'DD MMM, YYYY',
 		customizeSelectedDate = '',
 		//
@@ -165,6 +165,42 @@ export const DateTimePicker = (
 		return [...Array(42)].map((_1, index) => {
 			return dayjs(weekStartDate).add(index, 'days').toDate();
 		})
+	})
+
+
+	const splitArr = (list: Date[], splittedArr: Date[][]) => {
+		const subArray: Date[] = [];
+		const callbackArr: Date[][] = splittedArr;
+
+		if (list.length > 7) {
+			list.forEach((iterate, index) => {
+				if (index !== 0 && (index) % 7 === 0) {
+					callbackArr.push(subArray)
+					const val = list.splice(7)
+					splitArr(val, callbackArr)
+				} else {
+					subArray.push(iterate);
+				}
+			})
+		}
+		else if (list.length === 7) {
+			callbackArr.push(list)
+		}
+		return callbackArr;
+	}
+
+	const dateListss = createMemo(() => {
+		const currentMonth = headerView().monthIndex;
+		const currentYear = headerView().year;
+		const monthStartDate = dayjs(`${currentYear}, ${currentMonth},`).startOf('month').format('DD MMMM, YYYY')
+
+		const weekStartDate = dayjs(monthStartDate).startOf('week').toDate();
+
+		const dateArray = [...Array(42)].map((_1, index) => {
+			return dayjs(weekStartDate).add(index, 'days').toDate();
+		})
+
+		return splitArr(dateArray, [])
 	})
 
 	const momentFormatter = (date: Date | undefined, formatStr: string) => {
@@ -292,6 +328,61 @@ export const DateTimePicker = (
 		return dayjs(seletedDate).isSame(today);
 	})
 
+
+	const DateView = ({ it }: { it: Date }) => {
+		const startDate = dayjs(`${headerView().year}, ${headerView().month}`).startOf('months').toDate();
+		const endDate = dayjs(`${headerView().year}, ${headerView().month}`).endOf('months').toDate();
+
+		let isActive = false; // gives selected dates
+		let isRangeActive = false; // highlights the dates in-between
+		let isDatesDisabled = false; // disables the prev date during selection 
+
+		if (enableDateRangeSelector) {
+
+			if (dateRangeArr()[0] && !dateRangeArr()[1]) {
+				isActive = dayjs(it).isSame(dayjs(previousDateState()).startOf('days'));
+				isDatesDisabled = dayjs(it).isBefore(dayjs(previousDateState()).startOf('days'));
+				isRangeActive = false;
+			}
+			else if (dateRangeArr()[0] && dateRangeArr()[1]) {
+				isActive = dayjs(it).isSame(dayjs(locDate()).startOf('days')) || dayjs(it).isSame(dayjs(previousDateState()).startOf('days'));
+				isRangeActive = dayjs(it).isAfter(dayjs(previousDateState()).startOf('days')) && dayjs(it).isBefore(dayjs(locDate()).startOf('days'));
+			}
+		} else {
+			isActive = dayjs(it).isSame(dayjs(locDate()).startOf('days'));
+		}
+
+		// handles Max date given by user 
+		if (maxDate) {
+			isDatesDisabled = isDatesDisabled || dayjs(it).isSameOrAfter(dayjs(maxDate).startOf('days'));
+		}
+		if (minDate) {
+			isDatesDisabled = isDatesDisabled || dayjs(it).isSameOrBefore(dayjs(minDate).startOf('days'));
+		}
+		return (
+			<div
+				class={`week-list-items cur-pointer 
+													${isActive ? `${enableDateRangeSelector ? 'active-bg' : 'active '} box-shadow-card` : ''} 
+													${customizeListView}
+													${it < startDate || it > endDate ? 'cust-dis' : ''}
+													${isRangeActive ? `bg-hover-clr ${customizeRangeSelectedDates}` : ''}
+													${isDatesDisabled ? 'cust-dis pointer-none' : ''}
+													`}
+				onClick={() => {
+					if (enableDateRangeSelector) {
+						handleMultiSelectDate(it);
+					} else {
+						setLocDate(it);
+					}
+				}}
+			>
+				{momentFormatter(it, 'DD')}
+				{dayjs(it).isSame(dayjs(new Date()).startOf('day')) ? <span class='today_highlight' /> : null}
+			</div>
+
+		)
+	}
+
 	return (
 		<div class={`calendar ${customizeCalendar}`}>
 			<div
@@ -333,7 +424,7 @@ export const DateTimePicker = (
 				</div>
 
 				{/* Sub Header */}
-				{enableTodayNavigator || enableSelectedDate ?
+				{enableTodayNavigator || enableDateInputField ?
 					<div class={`cal-sub-header ${!enableTodayNavigator || !enableTimeView ? 'jst-center' : ''}`}>
 						{enableTodayNavigator ?
 							<button
@@ -348,14 +439,14 @@ export const DateTimePicker = (
 							</button> : null
 						}
 
-						{enableSelectedDate &&
+						{enableDateInputField &&
 							<div class='today-col'>
 								<input
 									type='text'
 									placeholder='DD MMM YYYY'
 									class={`today-col-input ${customizeSelectedDate}`}
 									value={momentFormatter(locDate() || dayjs().toDate(), 'DD MMM, YYYY')}
-									readOnly={!enableSelectedDateEditor}
+									readOnly={!enableDateInputFieldEditor}
 									onKeyPress={(event: any) => {
 										if (event.key === 'Enter' && event.target.value) {
 											editDate(event.target.value);
@@ -468,70 +559,30 @@ export const DateTimePicker = (
 
 					{/* Day view */}
 					{activeView() !== 'day' || isTimeViewEnabled() ? null :
-						<div class='container-day-view'>
+						<div class='container-day-view-tab'>
+							<table>
+								<thead>
+									{weekDays.map((it) => {
+										return (
+											<th>
+												<div class={`week-list-items pointer-none cust-dis ${customizeListHeader}`}>{it.short}</div>
+											</th>
+										)
+									})}
+								</thead>
+								<tbody>
+									{dateListss().map((iterate, index) => {
+										return <tr>
+											{iterate.map((it) => {
+												return <td>
+													<DateView it={it} />
+												</td>
+											})}
+										</tr>
+									})}
+								</tbody>
+							</table>
 
-							<div class='list-header week-list'>
-								{weekDays.map((it) => {
-									return (
-										<div class={`week-list-items pointer-none cust-dis ${customizeListHeader}`}>{it.short}</div>
-									)
-								})}
-							</div>
-							<div class='week-list week-list__date'>
-								{dateList().map((it) => {
-									const startDate = dayjs(`${headerView().year}, ${headerView().month}`).startOf('months').toDate();
-									const endDate = dayjs(`${headerView().year}, ${headerView().month}`).endOf('months').toDate();
-
-									let isActive = false; // gives selected dates
-									let isRangeActive = false; // highlights the dates in-between
-									let isDatesDisabled = false; // disables the prev date during selection 
-
-									if (enableDateRangeSelector) {
-
-										if (dateRangeArr()[0] && !dateRangeArr()[1]) {
-											isActive = dayjs(it).isSame(dayjs(previousDateState()).startOf('days'));
-											isDatesDisabled = dayjs(it).isBefore(dayjs(previousDateState()).startOf('days'));
-											isRangeActive = false;
-										}
-										else if (dateRangeArr()[0] && dateRangeArr()[1]) {
-											isActive = dayjs(it).isSame(dayjs(locDate()).startOf('days')) || dayjs(it).isSame(dayjs(previousDateState()).startOf('days'));
-											isRangeActive = dayjs(it).isAfter(dayjs(previousDateState()).startOf('days')) && dayjs(it).isBefore(dayjs(locDate()).startOf('days'));
-										}
-									} else {
-										isActive = dayjs(it).isSame(dayjs(locDate()).startOf('days'));
-									}
-
-									// handles Max date given by user 
-									if (maxDate) {
-										isDatesDisabled = isDatesDisabled || dayjs(it).isSameOrAfter(dayjs(maxDate).startOf('days'));
-									}
-									if (minDate) {
-										isDatesDisabled = isDatesDisabled || dayjs(it).isSameOrBefore(dayjs(minDate).startOf('days'));
-									}
-									return (
-										<div
-											class={`week-list-items cur-pointer 
-                                        ${isActive ? `${enableDateRangeSelector ? 'active-bg' : 'active '} box-shadow-card` : ''} 
-                                        ${customizeListView}
-                                        ${it < startDate || it > endDate ? 'cust-dis' : ''}
-                                        ${isRangeActive ? `bg-hover-clr ${customizeRangeSelectedDates}` : ''}
-                                        ${isDatesDisabled ? 'cust-dis pointer-none' : ''}
-                                        `}
-											onClick={() => {
-												if (enableDateRangeSelector) {
-													handleMultiSelectDate(it);
-												} else {
-													setLocDate(it);
-												}
-											}}
-										>
-											{momentFormatter(it, 'DD')}
-											{dayjs(it).isSame(dayjs(new Date()).startOf('day')) ? <span class='today_highlight' /> : null}
-										</div>
-
-									)
-								})}
-							</div>
 						</div>
 					}
 					{!isTimeViewEnabled() ? null :

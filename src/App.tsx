@@ -6,7 +6,13 @@ const App: Component = () => {
   return (
       <div class='parent'>
         <DateTimePicker
-          currentDate={new Date()}      
+          currentDate={new Date()}
+          enableCalendarViewType
+          enableDateInputFieldEditor
+          enableTimeView
+          enableTodayNavigator
+          ednableTimeEditing 
+          enableDateInputField
         />
       </div>
 
