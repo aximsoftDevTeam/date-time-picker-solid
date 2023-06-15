@@ -1,6 +1,6 @@
 {
   "name": "date-time-picker-solid",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "An interactive Date and Time picker for SolidJS. ",
   "author": "Aximsoft India Pvt Ltd",
   "main": "dist/index.umd.js",
@@ -59,8 +59,7 @@
     "vite-plugin-solid": "^2.3.0"
   },
   "dependencies": {
-    "autoprefixer": "^10.4.14",
-    "dayjs": "^1.11.6",
+    "dayjs": "^1.11.6", 
     "sass": "^1.55.0",
     "solid-js": "^1.5.1",
     "vite-plugin-dts": "^2.3.0"

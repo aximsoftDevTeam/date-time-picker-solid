@@ -43,7 +43,7 @@
 }
 
 .btn-class {
-  border: 1px solid #335d9b;
+  border: 0.0625rem solid #335d9b;
   background: white;
   font-weight: 600;
   font-size: 1rem;
@@ -73,6 +73,7 @@
   display: flex;
   flex-direction: column;
   color: #232323;
+  position: relative;
 }
 
 .cal-initial-view {
@@ -86,7 +87,7 @@
   justify-content: space-between;
   align-items: center;
   height: 2.3rem;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0rem 0.3125rem 0.9375rem;
 }
 
 .arrow-icon {
@@ -96,6 +97,25 @@
 
 .rotate-arrow-icon {
   rotate: -90deg;
+  animation: arrow_rotation 300ms;
+}
+
+@keyframes arrow_rotation {
+  0%{
+    rotate: -180deg;
+  }
+  40%{
+    rotate: -155deg;
+  }
+  60%{
+    rotate: -135deg;
+  }
+  80%{
+    rotate: -115deg;
+  }
+  100%{
+    rotate: -90deg;
+  }
 }
 
 .cal-parent {
@@ -105,7 +125,31 @@
   background: #ffff;
   border-radius: 0.625rem !important;
   padding: 1.5rem;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0rem 0.3125rem 0.9375rem;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 3.625rem;
+  animation: growDown 300ms ease-in;
+}
+
+@keyframes growDown {
+  0% {
+    opacity: 0.2;
+  }
+  40% {
+    opacity: 0.4;
+  }
+  60% {
+    opacity: 0.6;
+  }
+  80% {
+    opacity: 0.8;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 .cal-header {
@@ -121,8 +165,8 @@
   .date-val {
     font-size: 1rem;
     font-weight: 700;
-    line-height: 20px;
-    letter-spacing: 0px;
+    line-height: 1.25rem;
+    letter-spacing: 0rem;
     text-align: center;
   }
 
@@ -143,7 +187,7 @@
   .today-col {
     .today-col-input {
       border: none;
-      border-bottom: 1px solid #232323;
+      border-bottom: 0.0625rem solid #232323;
       height: 2.5rem;
       text-align: center;
       letter-spacing: 0.1rem;
@@ -237,7 +281,7 @@
         .today_highlight {
           border-radius: 50%;
           background: linear-gradient(91.51deg, #315a98 1.52%, #487cbf 100.83%) !important;
-          height: 2px;
+          height: 0.125rem;
           display: block;
           width: 100%;
         }
@@ -291,7 +335,7 @@
         font-weight: 600;
         max-width: 5rem;
         border: none;
-        border-bottom: 1px solid #232323;
+        border-bottom: 0.0625rem solid #232323;
       }
 
       .hour_value:focus-visible {
@@ -324,7 +368,7 @@
         font-weight: 600;
         max-width: 5rem;
         border: none;
-        border-bottom: 1px solid #232323;
+        border-bottom: 0.0625rem solid #232323;
       }
 
       .min_value:focus-visible {
@@ -369,7 +413,7 @@
   letter-spacing: normal;
 
   .update-time {
-    border: 1px solid #335d9b;
+    border: 0.0625rem solid #335d9b;
     border-radius: 0.5rem;
     background: #fff;
     font-weight: 600;
@@ -462,7 +506,7 @@
     tbody {
       td {
         text-align: center;
-        padding: 2px 6px;
+        padding: 0.125rem 0.375rem;
         div {
           text-transform: uppercase;
           font-size: small;
@@ -472,7 +516,7 @@
           .today_highlight {
             border-radius: 50%;
             background: linear-gradient(91.51deg, #315a98 1.52%, #487cbf 100.83%) !important;
-            height: 2px;
+            height: 0.125rem;
             display: block;
             width: 100%;
           }
