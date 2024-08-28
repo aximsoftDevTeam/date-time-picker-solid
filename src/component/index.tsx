@@ -192,7 +192,7 @@ export const DateTimePicker = (
 	const dateListss = createMemo(() => {
 		const currentMonth = headerView().monthIndex;
 		const currentYear = headerView().year;
-		const monthStartDate = dayjs(`${currentYear}, ${currentMonth},`).startOf('month').format('DD MMMM, YYYY')
+		const monthStartDate = dayjs(`${currentYear}-${currentMonth}`).startOf('month').format('DD MMMM, YYYY')
 
 		const weekStartDate = dayjs(monthStartDate).startOf('week').toDate();
 
