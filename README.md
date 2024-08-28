@@ -99,7 +99,7 @@ View the package in action: (
 # Dependencies
 [<img src="https://user-images.githubusercontent.com/94821587/199000964-80e84838-7f3f-49f9-9a91-6bcf32f9c87f.svg" alt="typescript" width="40" height="40" />](https://www.solidjs.com/)
 [<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" alt="typescript" width="40" height="40"/>](https://www.typescriptlang.org/)
-[<img src="https://user-images.githubusercontent.com/94821587/199001054-6d046033-4914-4b52-9fde-081e749618d4.svg" alt="typescript" width="40" height="40"/>](https://momentjs.com/)
+[<img src="https://github.com/user-attachments/assets/476c8c02-13e2-494c-839b-f22443d40166" alt="typescript" width="40" height="40"/>](https://day.js.org/en/)
 [<img src="https://user-images.githubusercontent.com/94821587/199011459-d948644b-d0c5-4a14-8809-96bf5508edc9.png" alt="typescript" width="40" height="40"/>](https://www.w3.org/Style/CSS/Overview.en.html)
 
 # Let's get connected
